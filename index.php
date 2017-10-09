@@ -23,7 +23,7 @@
       } else if(array_key_exists($_GET['add_to_cart'], $cookies_type_and_qty))
       {
         $cookies_type_and_qty[$id_biscuit]++;
-        echo "cookie existant indenté !";
+        echo "cookie existant incrémenté !";
       }
 
     }
