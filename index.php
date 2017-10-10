@@ -1,35 +1,20 @@
 <?php
-    // Start the session
-    session_start();
+
+    require 'inc/head.php';
 
     if(!isset($_SESSION['name']))
     {
         header("Location: login.php");
     }
 
-    $cookies_type_and_qty = [];
-
-    setcookie("panier", serialize($cookies_type_and_qty), time() + (86400 * 30), "/");
-
-    $id_biscuit = $_GET['add_to_cart'];
-
-    if(isset($_GET['add_to_cart']))
-    {
-        if(!array_key_exists($_GET['add_to_cart'], $cookies_type_and_qty))
-      {
-        $cookies_type_and_qty[] = $_GET['add_to_cart'];
-        $cookies_type_and_qty[$id_biscuit]++;
-        echo "cookie créé !";
-      } else if(array_key_exists($_GET['add_to_cart'], $cookies_type_and_qty))
-      {
-        $cookies_type_and_qty[$id_biscuit]++;
-        echo "cookie existant incrémenté !";
-      }
-
+    $cookies_type_and_qty = unserialize(@$_COOKIE["panier"]);
+    if(isset($_GET['add_to_cart'])) {
+        $id_biscuit = $_GET['add_to_cart'];
+        @$cookies_type_and_qty[$id_biscuit]++;
+        setcookie("panier", serialize($cookies_type_and_qty), time() + (86400 * 30), "/");
     }
-?>
 
-<?php require 'inc/head.php'; ?>
+?>
 
 <section class="cookies container-fluid">
   <div class="row">
