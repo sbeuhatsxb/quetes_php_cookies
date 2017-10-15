@@ -2,11 +2,11 @@
 
     require 'inc/head.php';
 
-    // if(!isset($_SESSION['name']))
-    // {
-    //     header("Location: login.php");
-    // }
-
+    if(!isset($_SESSION['name']))
+    {
+        header("Location: login.php");
+    }
+    
     $cookies_type_and_qty = unserialize(@$_COOKIE["panier"]);
     if(isset($_GET['add_to_cart'])) {
         $id_biscuit = $_GET['add_to_cart'];
